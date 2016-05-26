@@ -217,3 +217,10 @@ predict(trainingPopID = c(4, 5))
 select()
 cross()
 plotData2()
+
+
+
+
+
+
+######## test #############
