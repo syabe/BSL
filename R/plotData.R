@@ -37,8 +37,8 @@ plotData <- function(ymax = NULL, add = F, addDataFileName = "plotData"){
     g <- c(g, apply(muSim, 2, mean))
     group <- c(group, rep(nSim + 1, length(popIDselU)))
     size <- c(size, rep(2, length(popIDselU)))
-    data <- data.frame(g = g, popID = rep(0:(length(popIDselU) - 
-        1), nSim + 1), size = size, group = group, scheme = rep(1, 
+    data <- data.frame(g = g, popID = rep(0:(length(popIDselU) -
+        1), nSim + 1), size = size, group = group, scheme = rep(1,
         length(g)))
     if (add) {
         load(file = paste(addDataFileName, ".RData", sep = ""))
@@ -47,10 +47,10 @@ plotData <- function(ymax = NULL, add = F, addDataFileName = "plotData"){
         data <- rbind(data, data.previous)
     }
     data.previous <- data
-    save(data.previous, file = paste(addDataFileName, ".RData", 
+    save(data.previous, file = paste(addDataFileName, ".RData",
         sep = ""))
     p <- ggplot(data = data, aes(x = popID, y = g))
-    p <- p + geom_line(aes(size = factor(size), 
+    p <- p + geom_line(aes(size = factor(size),
         linetype = factor(scheme), group = factor(group)))
     if (is.null(ymax)) {
         p <- p + ylim(min(data$g), max(data$g))
@@ -58,10 +58,10 @@ plotData <- function(ymax = NULL, add = F, addDataFileName = "plotData"){
     else {
         p <- p + ylim(min(data$g), ymax)
     }
-    p <- p + scale_size_manual(name = "", values = c(0.5, 3), labels = c("Each", 
+    p <- p + scale_size_manual(name = "", values = c(0.5, 3), labels = c("Each",
         "Mean"))
     p <- p + labs(title = "", x = "Generation", y = "Genetic improvement")
-    p <- p + guides(alpha = guide_legend("Lines"), size = guide_legend("Lines"))
+    p <- p + guides(size = guide_legend("Lines"))
     p <- p + guides(linetype = guide_legend("Scheme"))
     print(p)
 }
